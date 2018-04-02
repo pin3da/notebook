@@ -15,34 +15,24 @@ void flat(vector<vector<edge>> &g, vector<int> &a,
   ts++;
 }
 
-
-/**
- *  Case: cost in nodes: let P = LCA(u, v), le(u) <= le(v)
+/**  Case: cost in nodes: let P = LCA(u, v), le(u) <= le(v)
  *    Case 1: P = u
  *     In this case, our query range would be [le(u), le(v)].
  *    Case 2: P != u
- *     In this case, our query range would be [ri(u), le(v)] + [le(P), le(P)].
- * */
+ *     In this case, our query range would be [ri(u), le(v)] + [le(P), le(P)].*/
 
-
-/**
- * Case when the cost is in the edges.
- * */
+// Case when the cost is in the edges.
 void compute_queries(vector<vector<edge>> &g) {
   // g is undirected
   int n = g.size();
-
   lca_tree.init(g, 0);
-
   vector<int> a(2 * n), le(n), ri(n), cost(n);
   // a: nodes in the flatten array
   // le: left id of the given node
   // ri: right id of the given node
   // cost: cost of the edge from the node to the parent
-
   int ts = 0; // timestamp
   flat(g, a, le, ri, cost, 0, -1, ts, 0);
-
   int q; cin >> q;
   vector<query> queries(q);
   for (int i = 0; i < q; i++) {
@@ -66,4 +56,3 @@ void compute_queries(vector<vector<edge>> &g) {
   }
   solve_mo(queries, a, le, cost); // this is the usal algorithm
 }
-
