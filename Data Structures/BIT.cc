@@ -1,21 +1,33 @@
-struct binary_index_tree {
-  int n;
-  int t[2 * N];
-  void add(int where, long long what){
-    for (where++; where <= n; where += where & -where){
-      t[where] += what;
+int tree[(1<<LOGSZ)+1];
+int N = (1<<LOGSZ);
+// add v to value at x
+void set(int x, int v) {
+  while(x <= N) {
+    tree[x] += v;
+    x += (x & -x);
+  }
+}
+// get cumulative sum up to and including x
+int get(int x) {
+  int res = 0;
+  while(x) {
+    res += tree[x];
+    x -= (x & -x);
+  }
+  return res;
+}
+// get largest value with cumulative sum less than or equal to x;
+// for smallest, pass x-1 and add 1 to result
+int getind(int x) {
+  int idx = 0, mask = N;
+  while(mask && idx < N) {
+    int t = idx + mask;
+    if(x >= tree[t]) {
+      idx = t;
+      x -= tree[t];
     }
+    mask >>= 1;
   }
-  void add(int from, int to, long long what) {
-    add(from, what);
-    add(to + 1, -what);
-  }
-  long long query(int where){
-    long long sum = t[0];
-    for (where++; where > 0; where -= where & -where){
-      sum += t[where];
-    }
-    return sum;
-  }
-};
+  return idx;
+}
 
