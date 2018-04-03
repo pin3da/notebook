@@ -1,7 +1,4 @@
 // Complexity: O(n log n)
-//Usage: Call SuffixArray::compute(s), where s is the
-//       string you want the Suffix Array for.
-//
 // * * * IMPORTANT: The last character of s must compare less
 //       than any other character (for example, do s = s + '\1';
 //       before calling this function).
@@ -16,9 +13,6 @@
 //        With this array, you can compare two suffixes in O(1):
 //        Suffix s[i..n) is smaller than s[j..n) if and
 //        only if rank[i] < rank[j].
-// lcp  = The length of the longest common prefix between two
-//        consecutive suffixes:
-//        lcp[i] = lcp(s + sa[i], s + sa[i-1]). lcp[0] = 0.
 namespace SuffixArray {
     int t, rank[MAXN], sa[MAXN], lcp[MAXN];
     bool compare(int i, int j){
