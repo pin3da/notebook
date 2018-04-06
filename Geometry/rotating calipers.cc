@@ -1,6 +1,18 @@
 typedef long double gtype;
 const gtype pi = M_PI;
 typedef complex<gtype> point;
+typedef complex<gtype> point;
+#define x real()
+#define y imag()
+#define polar(r, t) polar((gtype) (r), (t))
+// vector
+#define rot(v, t) ( (v) * polar(1, t) )
+#define crs(a, b) ( (conj(a) * (b)).y )
+#define dot(a, b) ( (conj(a) * (b)).x )
+#define pntLinDist(a, b, p) ( abs(crs((b)-(a), (p)-(a)) / abs((b)-(a))) )
+bool cmp_point(point const& p1, point const& p2) {
+    return p1.x == p2.x ? (p1.y < p2.y) : (p1.x < p2.x);
+}
 // O(n) - rotating calipers (works on a ccw closed convex hull)
 gtype rotatingCalipers(vector<point> &ps) {
     int aI = 0, bI = 0;
