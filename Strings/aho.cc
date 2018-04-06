@@ -5,18 +5,14 @@ const int MAXC = 26;
 // Bit i in this mask is on if the keyword with index i
 // appears when the machine enters this state.
 int out[MAXS];
-
 int f[MAXS]; // Failure function
 int g[MAXS][MAXC]; // Goto function, or -1 if fail.
-
 int buildMatchingMachine(const vector<string> &words,
     char lowestChar = 'a', char highestChar = 'z') {
   memset(out, 0, sizeof out);
   memset(f, -1, sizeof f);
   memset(g, -1, sizeof g);
-
   int states = 1; // Initially, we just have the 0 state
-
   for (int i = 0; i < words.size(); ++i) {
     const string &keyword = words[i];
     int currentState = 0;
@@ -30,14 +26,12 @@ int buildMatchingMachine(const vector<string> &words,
     // There's a match of keywords[i] at node currentState.
     out[currentState] |= (1 << i);
   }
-
   // State 0 should have an outgoing edge for all characters.
   for (int c = 0; c < MAXC; ++c) {
     if (g[0][c] == -1) {
       g[0][c] = 0;
     }
   }
-
   queue<int> q;
   // Iterate over every possible input
   for (int c = 0; c <= highestChar - lowestChar; ++c) {

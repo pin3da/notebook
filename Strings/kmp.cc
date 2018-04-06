@@ -10,7 +10,6 @@ void kmp(const string &needle, const string &haystack) {
     }
     if (needle[i] == needle[border[i]]) border[i]++;
   }
-
   // Now the actual matching
   int n = haystack.size();
   int seen = 0;

@@ -33,7 +33,6 @@ bool miller_rabin(long long n, int it = rounds) {
   }
   return true;
 }
-
 long long pollard_rho(long long n) {
   long long x, y, i = 1, k = 2, d;
   x = y = rand() % n;
@@ -52,7 +51,6 @@ long long pollard_rho(long long n) {
   }
   return 1;
 }
-
 // Returns a list with the prime divisors of n
 vector<long long> factorize(long long n) {
   vector<long long> ans;

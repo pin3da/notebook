@@ -4,15 +4,12 @@ struct MCMF {
     struct Edge { int x, y; ctype cap, cost; };
     vector<Edge> E;      vector<int> adj[MAXN];
     int N, prev[MAXN];   ctype dist[MAXN], phi[MAXN];
-
     MCMF(int NN) : N(NN) {}
-
     void add(int x, int y, ctype cap, ctype cost) { // cost >= 0
         Edge e1={x,y,cap,cost}, e2={y,x,0,-cost};
         adj[e1.x].push_back(E.size()); E.push_back(e1);
         adj[e2.x].push_back(E.size()); E.push_back(e2);
     }
-
     void mcmf(int s, int t, ctype &flowVal, ctype &flowCost) {
         int x;
         flowVal = flowCost = 0;  memset(phi, 0, sizeof(phi));
@@ -20,7 +17,6 @@ struct MCMF {
             for (x = 0; x < N; x++) prev[x] = -1;
             for (x = 0; x < N; x++) dist[x] = INF;
             dist[s] = prev[s] = 0;
-
             set< pair<ctype, int> > Q;
             Q.insert(make_pair(dist[s], s));
             while (!Q.empty()) {
@@ -38,7 +34,6 @@ struct MCMF {
                 }
             }
             if (prev[t] == -1) break;
-
             ctype z = INF;
             for (x = t; x != s; x = E[prev[x]].x)
                 { z = min(z, E[prev[x]].cap); }

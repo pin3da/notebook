@@ -4,9 +4,7 @@
 //       before calling this function).
 //Output:
 // sa   = The suffix array. Contains the n suffixes of s sorted
-//        in lexicographical order. Each suffix is represented
-//        as a single integer (the position in the string
-//        where it starts).
+//        in lexicographical order.
 // rank = The inverse of the suffix array. rank[i] = the index
 //        of the suffix s[i..n) in the pos array. (In other
 //        words, sa[i] = k <==> rank[k] = i).
@@ -103,10 +101,8 @@ void repeated_m_times(int m){
     if(j - i >= m) position = max(position, ps);
     i = j;
   }
-  if(length != 0)
-    printf("%d %d\n", length, position);
-  else
-    puts("none");
+  if(length != 0) printf("%d %d\n", length, position);
+  else puts("none");
 }
 void smallest_rotation(){
   // Reads a string of lenght k. Then just double it (s = s+s)

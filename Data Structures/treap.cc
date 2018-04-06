@@ -1,5 +1,4 @@
 #define null NULL
-
 struct node {
     int x, y, size;
     long long sum;
@@ -7,7 +6,6 @@ struct node {
     node(int k) : x(k), y(rand()), size(1),
                   l(null), r(null), sum(0) { }
 };
-
 node* relax(node* p) {
     if (p) {
         p->size = 1;
@@ -23,7 +21,6 @@ node* relax(node* p) {
     }
     return p;
 }
-
 // Puts all elements <= x in l and all elements > x in r.
 void split(node* t, int x, node* &l, node* &r) {
     if (t == null) l = r = null; else {
@@ -36,7 +33,6 @@ void split(node* t, int x, node* &l, node* &r) {
         }
     }
 }
-
 node* merge(node* l, node *r) {
     if (l == null) return relax(r);
     if (r == null) return relax(l);
@@ -48,7 +44,6 @@ node* merge(node* l, node *r) {
         return relax(r);
     }
 }
-
 node* insert(node* t, node* m) {
     if (t == null || m->y > t->y) {
         split(t, m->x, m->l, m->r);
@@ -58,7 +53,6 @@ node* insert(node* t, node* m) {
     else t->r = insert(t->r, m);
     return relax(t);
 }
-
 node* erase(node* t, int x) {
     if (t == null) return null;
     if (t->x == x) {
@@ -71,7 +65,6 @@ node* erase(node* t, int x) {
         return relax(t);
     }
 }
-
 // Returns any node with the given x.
 node* find(node* cur, int x) {
     while (cur != null and cur->x != x) {
@@ -80,7 +73,6 @@ node* find(node* cur, int x) {
     }
     return cur;
 }
-
 node* find_kth(node* cur, int k) {
   while (cur != null and k >= 0) {
     if (cur->l && cur->l->size > k) {
@@ -95,7 +87,6 @@ node* find_kth(node* cur, int k) {
   }
   return cur;
 }
-
 long long sum(node* p, int x) { // find the sum of elements <= x
     if (p == null) return 0LL;
     if (p->x > x) return sum(p->l, x);

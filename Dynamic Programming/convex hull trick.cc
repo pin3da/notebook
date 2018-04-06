@@ -5,13 +5,11 @@ struct line {
     return m * x + b;
   }
 };
-
 long double inter(line a, line b) {
   long double den = a.m - b.m;
   long double num = b.b - a.b;
   return num / den;
 }
-
 /**
  *  min m_i * x_j + b_i, for all i.
  *     x_j <= x_{j + 1}
@@ -23,7 +21,6 @@ struct ordered_cht {
   ordered_cht() {
     idx = 0;
   }
-
   void insert_line(long long m, long long b) {
     line cur(m, b);
     // new line's slope is less than all the previous
@@ -32,31 +29,21 @@ struct ordered_cht {
         // f(x) is better in interval [inter(ch.back(), cur), inf)
         ch.pop_back();
     }
-
     ch.push_back(cur);
   }
-
   long long eval(long long x) { // minimum
     // current x is greater than all the previous x,
     // if that is not the case we can make binary search.
     idx = min<int>(idx, ch.size() - 1);
     while (idx + 1 < (int)ch.size() && ch[idx + 1].eval(x) <= ch[idx].eval(x))
       idx++;
-
     return ch[idx].eval(x);
   }
 };
-
-
-/**
- *  Dynammic convex hull trick
- * */
-
+// Dynammic convex hull trick
 typedef long long int64;
 typedef long double float128;
-
 const int64 is_query = -(1LL<<62), inf = 1e18;
-
 struct Line {
   int64 m, b;
   mutable function<const Line*()> succ;
@@ -68,7 +55,6 @@ struct Line {
     return b - s->b < (s->m - m) * x;
   }
 };
-
 struct HullDynamic : public multiset<Line> { // will maintain upper hull for maximum
   bool bad(iterator y) {
     auto z = next(y);
@@ -87,7 +73,6 @@ struct HullDynamic : public multiset<Line> { // will maintain upper hull for max
     while (next(y) != end() && bad(next(y))) erase(next(y));
     while (y != begin() && bad(prev(y))) erase(prev(y));
   }
-
   int64 eval(int64 x) {
     auto l = *lower_bound((Line) { x, is_query });
     return l.m * x + l.b;

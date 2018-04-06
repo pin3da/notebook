@@ -9,7 +9,6 @@ long long d_log(long long a, long long b, long long n) {
       M[aj] = i;
     aj = (aj * a) % n;
   }
-
   long long coef = mod_pow(a, n - 2, n);
   coef = mod_pow(coef, m, n);
   // coef =  a ^ (-m)
@@ -23,7 +22,6 @@ long long d_log(long long a, long long b, long long n) {
   }
   return -1;
 }
-
 void ext_euclid(long long a, long long b, long long &x, long long &y, long long &g) {
   x = 0, y = 1, g = b;
   long long m, n, q, r;
@@ -33,7 +31,6 @@ void ext_euclid(long long a, long long b, long long &x, long long &y, long long 
     x = u, y = v, u = m, v = n;
   }
 }
-
 /**
  * Chinese remainder theorem.
  * Find z such that  z % x[i] = a[i] for all i.
@@ -43,14 +40,10 @@ long long crt(vector<long long> &a, vector<long long> &x) {
   long long n = 1;
   for (int i = 0; i < x.size(); ++i)
     n *= x[i];
-
   for (int i = 0; i < a.size(); ++i) {
     long long tmp = (a[i] * (n / x[i])) % n;
     tmp = (tmp * mod_inv(n / x[i], x[i])) % n;
     z = (z + tmp) % n;
   }
-
   return (z + n) % n;
 }
-
-

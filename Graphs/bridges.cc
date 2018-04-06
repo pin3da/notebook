@@ -2,13 +2,10 @@ struct edge{
   int to, id;
   edge(int a, int b) : to(a), id(b) {}
 };
-
 struct graph {
   vector<vector<edge> > g;
   vector<int> vi, low, d, pi, is_b;
-
   int ticks, edges;
-
   graph(int n, int m) {
     g.assign(n, vector<edge>());
     is_b.assign(m, 0);
@@ -18,13 +15,11 @@ struct graph {
     pi.resize(n);
     edges = 0;
   }
-
   void add_edge(int u, int v) {
     g[u].push_back(edge(v, edges));
     g[v].push_back(edge(u, edges));
     edges++;
   }
-
   void dfs(int u) {
     vi[u] = true;
     d[u] = low[u] = ticks++;
@@ -36,15 +31,12 @@ struct graph {
         dfs(v);
         if (d[u] < low[v])
           is_b[g[u][i].id] = true;
-
-
         low[u] = min(low[u], low[v]);
       } else {
         low[u] = min(low[u], d[v]);
       }
     }
   }
-
   // Multiple edges from a to b are not allowed.
   // (they could be detected as a bridge).
   // If you need to handle this, just count

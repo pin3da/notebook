@@ -20,14 +20,11 @@ DS data;
 int main() {
   int n, q;
   while (cin >> n >> q) {
-    for (int i = 0; i < SN; ++i)
-      s[i].clear();
+    for (int i = 0; i < SN; ++i) s[i].clear();
     vector<int> a(n);
     for (auto &i : a) cin >> i;
     for (int i = 0; i < q; ++i) {
-      int b, e;
-      cin >> b >> e;
-      b--; e--;
+      int b, e; cin >> b >> e; b--; e--;
       s[b / SN].emplace_back(b, e, i);
     }
     for (int i = 0; i < SN; ++i) {
